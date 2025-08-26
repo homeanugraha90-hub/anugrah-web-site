@@ -1,4 +1,4 @@
-const Faq = require("../models/faq"); // assuming you have a Faq model
+const Faq = require("../models/Faq"); // assuming you have a Faq model
 
 
 // Create FAQ
