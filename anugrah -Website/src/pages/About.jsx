@@ -5,11 +5,6 @@ import AnimatedCounter from "../components/AnimatedCounter";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Crown, Target } from "lucide-react";
 
-import img1 from "../assets/gate-1.png"
-import img2 from "../assets/allMember.jpg"
-import img3 from "../assets/Gate.png"
-import img4 from "../assets/park-7.jpg"
-import img5 from "../assets/park-1.jpg"
 import { MessageSquareText, Building2, PieChart } from "lucide-react";
 
 
@@ -20,24 +15,7 @@ const stats = [
   { value: 143, label: 'Properties Sold' },
 ];
 
-const steps = [
-  {
-    title: 'Step 1: Discover Your Dream Home',
-    description: 'Browse through a curated selection of properties tailored to your lifestyle and budget.',
-    image: img3,
 
-  },
-  {
-    title: 'Step 2: Schedule A Viewing',
-    description: 'Book a tour at your convenience and explore the space in person or virtually.',
-    image: img4,
-  },
-  {
-    title: 'Step 3: Seal The Deal',
-    description: 'Get expert guidance to finalize paperwork and move into your new home with confidence.',
-    image: img5,
-  },
-];
 
 
 function useInView(ref) {
@@ -61,11 +39,46 @@ function useInView(ref) {
 
 const About = () => {
      const [activeIndex, setActiveIndex] = useState(0);
+       const [aboutData, setAboutData] = useState([]);
 
 
   const sectionRef = useRef();
   const isInView = useInView(sectionRef);
   const [counts, setCounts] = useState(stats.map(() => 0));
+
+
+// default value agar aboutData null hai
+const firstSection = aboutData?.find(item => item.sectionName === "AboutSection") || null;
+const secondSection = aboutData?.find(item => item.sectionName === "SecondSection") || null;
+const thirdSection = aboutData?.find(item => item.sectionName === "ThirdSection") || null;
+const fourthSection = aboutData?.find(item => item.sectionName === "FourthSection") || null;
+
+
+const steps = [
+  {
+    title: 'Step 1: Discover Your Dream Home',
+    description: 'Browse through a curated selection of properties tailored to your lifestyle and budget.',
+    image: `http://localhost:5000/upload/${fourthSection?.Images[0]}`,
+
+  },
+  {
+    title: 'Step 2: Schedule A Viewing',
+    description: 'Book a tour at your convenience and explore the space in person or virtually.',
+    image: `http://localhost:5000/upload/${fourthSection?.Images[1]}`,
+  },
+  {
+    title: 'Step 3: Seal The Deal',
+    description: 'Get expert guidance to finalize paperwork and move into your new home with confidence.',
+    image: `http://localhost:5000/upload/${fourthSection?.Images[2]}`,
+  },
+];
+
+const parsedDescription = thirdSection?.description
+  ? JSON.parse(thirdSection.description)
+  : {};
+
+    console.log(firstSection);
+
 
   useEffect(() => {
     if (isInView) {
@@ -94,6 +107,12 @@ const About = () => {
     }
   }, [isInView]);
 
+ useEffect(() => {
+    fetch("http://localhost:5000/api/about/")
+      .then((res) => res.json())
+      .then((data) => setAboutData(data))
+      .catch((err) => console.error("Error fetching about data:", err));
+  }, []);
 
 
 
@@ -132,13 +151,15 @@ const About = () => {
     <div>
       {/* About first Section */}
     
-    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[60vh] flex items-center justify-center bg-black">
-      {/* Background Image */}
-      <img
-  src={img1}
-  alt="About Us Background"
-  className="absolute inset-0 w-full h-full  object-bottom opacity-70 bg-no-repeat"
-/>
+    <div
+  className="relative bg-cover bg-center h-[500px] flex items-center justify-center text-white"
+ style={{ backgroundImage: `url(http://localhost:5000/upload/${firstSection?.Images[0]})` }}
+
+>
+  {/* Background Image */}
+
+
+    
 
 
       {/* Overlay Content */}
@@ -167,7 +188,7 @@ const About = () => {
   {/* Fixed Background Image with smooth scroll */}
   <div
     className="h-[60vh] bg-fixed bg-center bg-cover flex flex-col items-center justify-center"
-    style={{ backgroundImage: `url(${img2})` }}
+     style={{ backgroundImage: `url(http://localhost:5000/upload/${secondSection?.Images[0]})` }}
   >
    
   </div>
@@ -201,17 +222,11 @@ const About = () => {
         <div>
           <div className="flex items-center mb-4">
             <Crown className="w-6 h-6 text-black mr-2" />
-            <h2 className="text-xl font-bold">Our Mission</h2>
+            <h2 className="text-xl font-bold">{parsedDescription.title1}</h2>
           </div>
           <p className="text-gray-600 mb-4">
-            To simplify the real estate journey by connecting people with the
-            right properties through trust, transparency, and technology.
-          </p>
-          <p className="text-gray-600">
-            We are committed to delivering personalized experiences, whether
-            you’re buying, selling, or renting. We embrace new technologies and
-            market trends to deliver smarter, faster, and more efficient
-            property solutions.
+           {parsedDescription.content1}
+         
           </p>
         </div>
 
@@ -219,16 +234,10 @@ const About = () => {
         <div>
           <div className="flex items-center mb-4">
             <Target className="w-6 h-6 text-black mr-2" />
-            <h2 className="text-xl font-bold">Our Vision</h2>
+            <h2 className="text-xl font-bold">{parsedDescription.title2}</h2>
           </div>
           <p className="text-gray-600 mb-4">
-            To become the most trusted real estate partner by redefining how
-            people discover, evaluate, and engage with properties.
-          </p>
-          <p className="text-gray-600">
-            We envision a future where every individual can find their ideal
-            home or investment with confidence, supported by innovation,
-            integrity, and a deep understanding of market needs.
+            {parsedDescription.content2}
           </p>
         </div>
       </div>
@@ -276,7 +285,7 @@ const About = () => {
 
 
 
-
+{/* Homebuying Steps */}
  <section className=" py-32">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left: Steps */}

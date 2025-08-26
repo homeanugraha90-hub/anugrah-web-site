@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import heroImg from "../assets/gate-1.png"; // Hero background image
 import plotImg from "../assets/park-22.jpg"; // Residential plots image
 import natureImg from "../assets/about-4.jpg"; // Nature & lifestyle image
+import axios from "axios";
 
 const WhyJewar = () => {
+    const [sections, setSections] = useState([]);
+
+    const firstSection = sections.find((section) => section.sectionName === "firstSection");
+    const secondSection = sections.find((section) => section.sectionName === "SecondSection");
+    const thirdSection = sections.find((section) => section.sectionName === "ThirdSection");
+
+
+   useEffect(() => {
+          axios
+              .get("http://localhost:5000/api/why-jeware")
+              .then((res) => {
+                  setSections(res.data);
+              })
+              .catch((err) => {
+                  console.error("Error fetching home data", err);
+              });
+      }, []);
+  
   return (
     <div className="font-sans">
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[500px] flex items-center justify-center text-white"
-        style={{ backgroundImage: `url(${heroImg})` }}
+        style={{ backgroundImage: `url(http://localhost:5000/upload/${firstSection?.Images[0]})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 text-center px-4">
@@ -22,23 +41,17 @@ const WhyJewar = () => {
 
       {/* About Section */}
       <section className="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
-        <img src={plotImg} alt="Residential Plots" className="rounded-xl shadow-lg" />
+        <img src={`http://localhost:5000/upload/${secondSection?.Images[0]}`} alt="Residential Plots" className="rounded-xl shadow-lg" />
         <div>
-          <h2 className="text-3xl font-bold mb-4">Anugrah Homes</h2>
+          <h2 className="text-3xl font-bold mb-4">{secondSection?.content?.title}</h2>
           <p className="text-gray-700 mb-4">
-            The Anugrah Homes provides the best opportunity to invest in Residential Plots Land
-            with all luxurious amenities & modern facilities.
+           {secondSection?.content?.description1}
           </p>
           <p className="text-gray-700 mb-4">
-            Anugrah Homes focuses on letting you detach from the world and reconnect with your
-            spirit by creating a setting rich in peace and tranquility, surrounded by nature,
-            while still offering all the amenities of luxury living.
+            {secondSection?.content?.description2}
           </p>
           <p className="text-gray-700">
-            Anugrah Homes is the natural manifestation of a modern yet fashionably confident plot
-            in the countryside. We create customized adventures and discoveries for our visitors
-            through bespoke cultural, culinary, wellness, architecture, lifestyle, and personalized
-            service experiences.
+            {secondSection?.content?.description3}
           </p>
         </div>
       </section>
@@ -93,7 +106,7 @@ const WhyJewar = () => {
             From lush green spaces to modern amenities, Anugrah Homes redefines countryside living.
           </p>
         </div>
-        <img src={natureImg} alt="Nature and Lifestyle" className="rounded-xl shadow-lg" />
+        <img src={`http://localhost:5000/upload/${thirdSection?.Images[0]}`} alt="Nature and Lifestyle" className="rounded-xl shadow-lg" />
       </section>
 
       {/* Call to Action */}

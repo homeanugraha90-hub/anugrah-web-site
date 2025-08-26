@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: "Contact Us", type: "page", path: "/contact" },
     { name: "Sign Up", type: "page", path: "/auth" },
     // { name: "Login", type: "page", path: "/login" },
-    { name: "Admin Dashboard", type: "page", path: "/adminDash" },
+    // { name: "Admin Dashboard", type: "page", path: "/adminDash" },
   ];
 
   const scrollTo = (id) => {

@@ -22,7 +22,8 @@ exports.updateHome = async (req, res) => {
   try {
     const sectionName = req.params.name;
     const { designType, content } = req.body;
-    const images = req.files ? req.files.map(file => file.filename) : [];
+    const images = req.files?.images ? req.files.images.map(file => file.filename) : [];
+     const videos = req.files?.videos ? req.files.videos.map(file => file.filename) : [];
 
     let parsedContent = content;
     if (typeof content === "string") {
@@ -45,6 +46,7 @@ exports.updateHome = async (req, res) => {
     };
 
     if (images.length > 0) updateData.images = images;
+     if (videos.length > 0) updateData.videos = videos;
 
     const section = await Home.findOneAndUpdate(
       { sectionName },

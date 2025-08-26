@@ -5,12 +5,14 @@ import "swiper/css/pagination";
 import { Star } from "lucide-react";
 import CardSlider from "../components/CardSlider";
 import ContactFaq from "../components/ContactFaq";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 
 const Price = () => {
+  const nav=useNavigate();
   return (
     <main className="pt-16">
       {/* Hero Banner */}
@@ -53,7 +55,7 @@ const Price = () => {
               Perfect for compact luxury homes.
             </p>
             <span className="text-4xl font-extrabold mb-6">₹12.5 Lakh</span>
-            <button className="bg-white border border-black text-black px-4 py-2 font-medium rounded hover:bg-black hover:text-white transition">
+            <button onClick={() => nav("/site-visit")} className="bg-white border border-black text-black px-4 py-2 font-medium rounded hover:bg-black hover:text-white transition">
               Book Now
             </button>
             <ul className="mt-6 text-sm text-left text-gray-600 space-y-2">
@@ -86,7 +88,7 @@ const Price = () => {
               Best choice for spacious villas.
             </p>
             <span className="text-4xl font-extrabold mb-6">₹19.9 Lakh</span>
-            <button className="bg-black text-white px-4 py-2 font-medium rounded hover:bg-gray-800 transition">
+            <button onClick={() => nav("/site-visit")} className="bg-black text-white px-4 py-2 font-medium rounded hover:bg-gray-800 transition">
               Book Now
             </button>
             <ul className="mt-6 text-sm text-left text-gray-600 space-y-2">
@@ -116,7 +118,7 @@ const Price = () => {
               Ideal for large luxury residences.
             </p>
             <span className="text-4xl font-extrabold mb-6">₹28.5 Lakh</span>
-            <button className="bg-white border border-black text-black px-4 py-2 font-medium rounded hover:bg-black hover:text-white transition">
+            <button onClick={() => nav("/site-visit")} className="bg-white border border-black text-black px-4 py-2 font-medium rounded hover:bg-black hover:text-white transition">
               Book Now
             </button>
             <ul className="mt-6 text-sm text-left text-gray-600 space-y-2">

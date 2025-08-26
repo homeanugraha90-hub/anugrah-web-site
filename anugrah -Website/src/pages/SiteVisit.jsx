@@ -67,7 +67,7 @@ const SiteVisit = () => {
     <div className="bg-white text-gray-800">
       {/* Hero Section */}
       <section
-        className="relative h-[60vh] flex items-center justify-center text-white"
+        className="relative h-[500px] flex items-center justify-center text-white"
         style={{
           backgroundImage: `url(${siteVisitImg})`,
           backgroundSize: "cover",

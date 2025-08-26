@@ -1,6 +1,7 @@
 import React ,{useState} from "react";
 import { FcGoogle } from "react-icons/fc";
 import { registerUser } from "../backend/authService";
+import img1 from "../assets/third.png"
 
 
 
@@ -25,13 +26,12 @@ const SignUp = () => {
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
       <div
-        className="md:w-1/2 w-full bg-blue-600 text-white flex flex-col justify-center px-8 py-12 relative bg-cover bg-center"
+        className="md:w-1/2 w-full  text-white flex flex-col justify-center px-8 py-12 relative bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d')",
+          backgroundImage: `url(${img1})`,
         }}
       >
-        <div className="bg-blue-700 bg-opacity-70 absolute inset-0"></div>
+        <div className=" bg-opacity-70 absolute inset-0"></div>
         <div className="relative z-10">
           <h1 className="text-3xl font-bold mb-4">Looks like you're new here!</h1>
           <p className="text-lg">

@@ -1,21 +1,48 @@
-
-// import StatsCard from './StatsCard';
-import { UserGroupIcon, CurrencyDollarIcon, TrendingUpIcon, RefreshIcon, DownloadIcon, ShoppingCartIcon } from '@heroicons/react/outline';
-import Sidebar from './Sidebar';
-import Navbars from './Navbars';
-import SalesChart from './SalesChart';
-import StatsCard from './StatsCard';
+import React, { useEffect, useState } from "react";
+import Sidebar from "./Sidebar";
 
 export default function AdminDash() {
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/logs")
+      .then(res => res.json())
+      .then(data => setLogs(data));
+  }, []);
+
   return (
-    <div className="flex pt-16">
-      <Sidebar />
-      <div className="flex-1 ">
-        <Navbars />
-        <div className="p-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <h1>Hello !</h1>
-        </div>
-        
+    <div className="pt-16">
+      <Sidebar/>
+      <h1 className="text-2xl font-bold mb-4 text-black">Activity Log</h1>
+      <div className="grid gap-4">
+        {logs.map((log) => (
+          <div key={log._id} className="p-4 border rounded-lg shadow bg-white">
+            <p className="text-gray-800">
+              <strong>{log.action.toUpperCase()}</strong> in{" "}
+              <span className="text-blue-600">{log.collectionName}</span>
+            </p>
+            <p className="text-sm text-gray-600">
+              {new Date(log.timestamp).toLocaleString()}
+            </p>
+
+            {/* Agar img ya content h to dikhaye */}
+            {log.data?.images && (
+              <div className="flex gap-2 mt-2">
+                {log.data.images.map((img, i) => (
+                  <img
+                    key={i}
+                    src={`http://localhost:5000/upload/${img}`}
+                    alt="update"
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                ))}
+              </div>
+            )}
+            {log.data?.content && (
+              <p className="mt-2 text-gray-700">{log.data.content}</p>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

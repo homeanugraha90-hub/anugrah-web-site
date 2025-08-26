@@ -1,5 +1,5 @@
 import React from "react";
-import heroImg from "../assets/Gate.png"; // Hero section image
+import heroImg from "../assets/gate-1.png"; // Hero section image
 import {
   ShieldCheck,
   TreePine,
@@ -76,7 +76,7 @@ const Amenities = () => {
     <div className="font-sans">
       {/* Hero Section */}
       <section
-        className="relative bg-cover bg-center h-[400px] flex items-center justify-center text-white"
+        className="relative bg-cover bg-center h-[500px] flex items-center justify-center text-white"
         style={{ backgroundImage: `url(${heroImg})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>

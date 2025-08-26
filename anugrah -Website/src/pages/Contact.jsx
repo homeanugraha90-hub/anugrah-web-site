@@ -78,7 +78,7 @@ const Contact = () => {
 
 
 
- <div className="relative w-full h-64 md:h-80 lg:h-96">
+ <div className="relative w-full h-64 md:h-80 lg:h-[500px]">
       {/* Background Image */}
       <img 
         src={img1}  // 👈 yahan apni image ka path do

@@ -5,7 +5,8 @@ const homeSchema = new mongoose.Schema({
    sectionName: { type: String, required: true, unique: true }, // e.g. hero, about
   designType: { type: String, required: true }, // tells frontend how to display
   content: { type: mongoose.Schema.Types.Mixed }, // can hold any JSON/text
-  images: [{ type: String }] 
-});
+  images: [{ type: String }] ,
+  videos: [{ type: String }]
+}, { timestamps: true });
 
 module.exports = mongoose.model("Home", homeSchema);

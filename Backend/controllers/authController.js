@@ -44,11 +44,8 @@ exports.loginUser = async (req, res) => {
   }
 
   res.json({
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-     role: user.role,
-    token: generateToken(user._id)
+    message: "Login successful",
+    role: user.role
   });
 };
 
@@ -69,4 +66,23 @@ exports.loginAdmin = async (req, res) => {
     role: admin.role,
     token: generateToken(admin._id, admin.role)
   });
+};
+
+
+// Delete user by ID (Admin only)
+exports.deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params; // user id from URL
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await User.deleteOne({ _id: id });
+
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting user", error: error.message });
+  }
 };

@@ -1,22 +1,195 @@
-import React, { useState } from "react";
-import img1 from "../assets/gate-1.png";
+import React, { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 import img6 from "../assets/g2.jpg";
 import img7 from "../assets/road-1.png";
 import img8 from "../assets/g1.jpg";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
-import img2 from "/artical-1.jpg";
 import img3 from "/artical-2.jpg";
 import img4 from "/artical-3.png";
 import img5 from "/artical-4.png";
 import imgs6 from "/artical-5.png";
-import imgs7 from "/artical-6.png";
-import imgs8 from "/artical-7.png";
-import img9 from "/artical-8.png";
 
-const blogPosts = [
+
+
+
+
+
+
+const Media = () => {
+   const [sections, setSections] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/media")
+      .then((res) => res.json())
+      .then((data) => {
+        
+        setSections(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching media:", err);
+        setLoading(false);
+      });
+  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2;
+
+
+const firstSection = sections.find((section) => section.sectionName === "firstSection");
+   const blogposts = sections.find((section) => section.sectionName === "blogPosts");
+   const blogposts2 = sections.find((section) => section.sectionName === "blogPost-2");
+   const blogposts3 = sections.find((section) => section.sectionName === "blogPost-3");
+
+    const article1 = sections.find((section) => section.sectionName === "ThirdSection");
+
+
+
+    const article2 = sections.find((section) => section.sectionName === "Article-2");
+
+  const article3 = sections.find((section) => section.sectionName === "Article-3");
+
+const article4 = sections.find((section) => section.sectionName === "Article-4");
+
+
+const article5 = sections.find((section) => section.sectionName === "Article-5");
+
+
+
+
+   let blogContent = null;
+
+if (blogposts?.content) {
+  try {
+    blogContent = JSON.parse(blogposts.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+
+let blogContent2 = null;
+
+if (blogposts2?.content) {
+  try {
+    blogContent2 = JSON.parse(blogposts2.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+let blogContent3 = null;
+
+if (blogposts3?.content) {
+  try {
+    blogContent3 = JSON.parse(blogposts3.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+let articledetail1 = null;
+
+if (article1?.content) {
+  try {
+    articledetail1 = JSON.parse(article1.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+
+
+let articledetail2 = null;
+
+if (article2?.content) {
+  try {
+    articledetail2 = JSON.parse(article2.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+
+
+
+
+let articledetail3 = null;
+
+if (article3?.content) {
+  try {
+    articledetail3 = JSON.parse(article3.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+let articledetail4 = null;
+
+if (article4?.content) {
+  try {
+    articledetail4 = JSON.parse(article4.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+let articledetail5 = null;
+
+if (article5?.content) {
+  try {
+    articledetail5 = JSON.parse(article5.content);
+  } catch (err) {
+    console.error("Invalid JSON:", err);
+  }
+}
+
+
+const recentPostsData = [
+  {
+    id: articledetail1?.id || 1,
+    img: article1 ? `http://localhost:5000/upload/${article1.images[0]}` : img6,
+    title: articledetail1?.title || "Loading..." ,
+    date: articledetail1?.date || "Loading...",
+        blogId: article1?._id || "Loading...",
+
+  },
+  {
+    id: articledetail2?.id || 2,
+    img: article2 ? `http://localhost:5000/upload/${article2.images[0]}` : img3,
+    title: articledetail2?.title || "Loading...",
+    date: articledetail2?.date || "Loading...",
+    blogId: article2?._id || "Loading...",
+  },
+  {
+    id: articledetail3?.id || 3,
+    img: article3 ? `http://localhost:5000/upload/${article3.images[0]}` : img4,
+    title: articledetail3?.title || "Loading...",
+    date: articledetail3?.date || "Loading...",
+    blogId: article3?._id || "Loading...",
+  },
+  {
+    id: articledetail4?.id || 4,
+    img: article4 ? `http://localhost:5000/upload/${article4.images[0]}` : img5,
+    title: articledetail4?.title || "Loading...",
+    date: articledetail4?.date || "Loading...",
+    blogId: article4?._id || "Loading...",
+  },
+  {
+    id: articledetail5?.id || 5,
+    img: article5 ? `http://localhost:5000/upload/${article5.images[0]}` : imgs6,
+    title: articledetail5?.title || "Loading...",
+    date: articledetail5?.date || "Loading...",
+    blogId: article5?._id || "Loading...",
+  },
+
+];
+
+  const blogPosts = [
   {
     id: 1,
-    image: img6,
+    image: img8,
+     blogId: blogposts?._id || "Loading...",
     tag: "Hiway",
     title: "The Future Of Office Spaces In A Hybrid Work Era",
     date: "May 06, 2025",
@@ -28,6 +201,7 @@ const blogPosts = [
   {
     id: 2,
     image: img7,
+     blogId: blogposts?._id || "Loading...",
     tag: "Property",
     title: "How To Identify High-Growth Neighborhoods In 2025",
     date: "May 18, 2025",
@@ -38,10 +212,11 @@ const blogPosts = [
   },
   {
     id: 3,
-    image: img8,
+    image: blogposts3 ? `http://localhost:5000/upload/${blogposts3.images[0]}` : img8,
     tag: "Trending",
-    title: "Will 2025 Be A Buyer’s Or Seller’s Market?",
-    date: "June 15, 2025",
+     blogId: blogposts3?._id || "Loading...",
+    title: blogContent3?.title || "Loading...",
+    date: blogContent3?.date || "Loading...",
     author: "Pásztor Kira",
     excerpt:
       "Supply chain improvements and labor availability may ease new home construction challenges...",
@@ -49,10 +224,11 @@ const blogPosts = [
   },
   {
     id: 4,
-    image: img7,
+    image: blogposts2 ? `http://localhost:5000/upload/${blogposts2.images[0]}` : img8,
     tag: "Property",
-    title: "Urban Expansion & Infrastructure in 2025",
-    date: "July 02, 2025",
+     blogId: blogposts2?._id || "Loading...",
+    title: blogContent2?.title || "Loading...",
+    date: blogContent2?.date || "Loading...",
     author: "Kelemen Krisztina",
     excerpt:
       "Infrastructure growth is creating new investment opportunities in suburban areas...",
@@ -60,8 +236,9 @@ const blogPosts = [
   },
   {
     id: 5,
-    image: img8,
+    image: blogposts ? `http://localhost:5000/upload/${blogposts.images[0]}` : img7,
     tag: "Trending",
+     blogId: blogposts?._id || "Loading...",
     title: "Sustainable Housing: Future or Fad?",
     date: "August 01, 2025",
     author: "Pásztor Kira",
@@ -71,10 +248,11 @@ const blogPosts = [
   },
   {
     id: 6,
-    image: img6,
+    image: blogposts ? `http://localhost:5000/upload/${blogposts.images[0]}` : img7,
     tag: "Hiway",
-    title: "Highway Development & Real Estate Growth",
-    date: "August 10, 2025",
+    blogId: blogposts?._id || "Loading...",
+    title: blogContent?.title || "Loading...",
+    date:  blogContent?.date || "Loading...",
     author: "Printer Beatrix",
     excerpt:
       "Connectivity improvements can drastically impact real estate values in rural areas...",
@@ -82,60 +260,6 @@ const blogPosts = [
   },
 ];
 
-const recentPostsData = [
-  {
-    id: 1,
-    img: img2,
-    title: "Why Millennials Are Reshaping The Real Estate Market",
-    date: "October 21, 2025",
-  },
-  {
-    id: 2,
-    img: img3,
-    title: "Technology Trends Redefining Modern Homes",
-    date: "October 12, 2025",
-  },
-  {
-    id: 3,
-    img: img4,
-    title: "Cities With The Highest ROI For Airbnb Rentals",
-    date: "October 14, 2025",
-  },
-  {
-    id: 4,
-    img: img5,
-    title: "Affordable Housing: A 2025 Perspective",
-    date: "October 10, 2025",
-  },
-  {
-    id: 5,
-    img: imgs6,
-    title: "Why Millennials Are Reshaping The Real Estate Market",
-    date: "October 21, 2025",
-  },
-  {
-    id: 6,
-    img: imgs7,
-    title: "Technology Trends Redefining Modern Homes",
-    date: "October 12, 2025",
-  },
-  {
-    id: 7,
-    img: imgs8,
-    title: "Cities With The Highest ROI For Airbnb Rentals",
-    date: "October 14, 2025",
-  },
-  {
-    id: 8,
-    img: img9,
-    title: "Affordable Housing: A 2025 Perspective",
-    date: "October 10, 2025",
-  },
-];
-
-const Media = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2;
 
   // Sort latest first
   const sortedPosts = [...blogPosts].sort(
@@ -164,25 +288,36 @@ const Media = () => {
     return pages;
   };
 
+
+  
+
+  
+
+   
+  if (loading) return <p className="text-center">Loading...</p>;
+
+
   return (
     <div>
       {/* Hero Section */}
-      <section
-        style={{
-          backgroundImage: `url(${img1})`,
-          backgroundSize: "cover",
-          backgroundPosition: "right-bottom",
-          backgroundRepeat: "no-repeat",
-        }}
-        className="relative h-[400px] flex items-center justify-center text-white"
-      >
+      
+        <section
+         
+          style={{
+            backgroundImage: `url(http://localhost:5000/upload/${firstSection?.images[0]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+          className="relative h-[500px] flex items-end justify-center text-white"
+        >
         <div className="bg-black/40 absolute inset-0 flex items-center justify-center">
           <div className="max-w-7xl mx-auto px-4 text-center text-white">
             <h1 className="text-4xl font-bold ">Latest News</h1>
             <p className="text-sm mt-4">Home &gt; Blog</p>
           </div>
         </div>
-      </section>
+      </section> 
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-12 gap-8">
@@ -194,9 +329,9 @@ const Media = () => {
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-auto rounded-xl object-cover"
+                  className="w-full h-auto  rounded-xl object-cover"
                 />
-                <span className="absolute top-3 left-3 bg-yellow-400 text-xs font-bold px-3 py-1 rounded">
+                <span className="absolute top-3 left-3 bg-[#ebe413] text-xs font-bold px-4 py-2  rounded">
                   {post.tag.toUpperCase()}
                 </span>
               </div>
@@ -207,12 +342,13 @@ const Media = () => {
               </div>
               <h2 className="text-3xl font-serif">{post.title}</h2>
               <p className="text-gray-600">{post.excerpt}</p>
-              <a
-                href="#"
-                className="text-blue-600 font-semibold hover:underline"
-              >
-                Read More
-              </a>
+              <Link
+  to={`/blog/${post.blogId}`}
+  className="text-blue-600 font-semibold hover:underline"
+>
+
+  Read More →
+</Link>
             </div>
           ))}
 
@@ -315,7 +451,7 @@ const Media = () => {
             <div className="space-y-4">
               {recentPostsData
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 4)
+                .slice(0, 5)
                 .map((post) => (
                   <div
                     key={post.id}
@@ -327,7 +463,13 @@ const Media = () => {
                       className="w-20 h-20 rounded object-cover"
                     />
                     <div>
-                      <p className="text-sm font-semibold">{post.title}</p>
+                      <Link
+  to={`/blog/${post.blogId}`}
+  className=" font-semibold hover:underline"
+>
+ <p className="text-sm font-semibold">{post.title}</p>
+</Link>
+                      
                       <span className="text-xs text-gray-500">{post.date}</span>
                     </div>
                   </div>

@@ -2,12 +2,14 @@ import React, { useState,useEffect } from "react";
 import {useNavigate} from "react-router-dom"
 import { FaFacebookF, FaTwitter, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { loginUser } from "../backend/authService";
-
+import { Eye, EyeOff } from "lucide-react";
+import img from "../assets/Gate.png"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const nav=useNavigate();
 
@@ -46,7 +48,7 @@ useEffect(() => {
 
       if (data) {
         console.log("Login successful", data);
-        nav("/"); // Redirect to home or dashboard
+        nav("/adminDash"); // Redirect to admin dashboard
         // Redirect or save token
       } else {
         setError(data.message || "Invalid credentials");
@@ -63,12 +65,13 @@ useEffect(() => {
         className="md:w-1/2 w-full text-white flex flex-col justify-center items-center px-8 py-12 relative bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f')",
+            `url(${img})`,
         }}
       >
-        <div className="bg-blue-700 bg-opacity-80 absolute inset-0"></div>
+        <div className=" bg-opacity-80 absolute inset-0"></div>
         <div className="relative z-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome back!</h1>
+          <h1 className="text-4xl font-bold mb-4 text-black">Welcome back!</h1>
+          
           <p className="text-lg mb-6">
             Get access to your Orders, Wishlist and Recommendations.
           </p>
@@ -95,14 +98,23 @@ useEffect(() => {
             />
 
             {/* Password */}
-            <input
-              type="password"
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3  border border-gray-700 rounded-lg mb-4 focus:outline-none focus:border-blue-500"
-              required
-            />
+           <div className="relative w-full">
+      <input
+        type={showPassword ? "text" : "password"}
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full p-3 border border-gray-700 rounded-lg mb-4 focus:outline-none focus:border-blue-500"
+        required
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+      >
+        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </button>
+    </div>
 
             {/* Remember Me + Forgot Password */}
             <div className="flex items-center justify-between mb-6 text-sm">
@@ -125,7 +137,7 @@ useEffect(() => {
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition"
             >
-              Sign In
+              Login
             </button>
           </form>
 

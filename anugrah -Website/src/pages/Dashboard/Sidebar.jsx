@@ -8,26 +8,26 @@ export default function Sidebar() {
         <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
           <HomeIcon className="w-5 h-5" /> Dashboard
         </a>
-        <a href="/" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        <a href="/adminHome" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
          Home
         </a>
-        <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        <a href="/adminAbout" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
          About
         </a>
-        <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        <a href="/adminWhyJewar" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
          Why Jewar
         </a>
-        <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        <a href="/adminFaq" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
           Faq
         </a>
-        <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        <a href="/adminMedia" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
           Media
         </a>
-        <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+        {/* <a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
           Price
         </a><a href="#" className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
           Contact Us
-        </a>
+        </a> */}
       </nav>
     </aside>
   );

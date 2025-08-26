@@ -17,6 +17,12 @@ import SiteVisit from './pages/SiteVisit'
 import SignIn from './pages/SignIn'
 import Login from './pages/Login'
 import AdminDash from './pages/Dashboard/AdminDash'
+import BlogDetails from './pages/BlogDetails'
+import AdminHome from './pages/Dashboard/AdminHome'
+import AdminAbout from './pages/Dashboard/AdminAbout'
+import AdminWhyJewar from './pages/Dashboard/AdminWhyJewar'
+import AdminFaq from './pages/Dashboard/AdminFaq'
+import AdminMedia from './pages/Dashboard/AdminMedia'
 
 
 function App() {
@@ -32,6 +38,7 @@ function App() {
           <Route path="/about" element={<About/>} />
            <Route path="/price" element={<Price/>} />
            <Route path="/media" element={<Media/>} />
+            <Route path="/blog/:id" element={<BlogDetails    />} />
             <Route path="/why-jewar" element={<WhyJewar/>} />
             <Route path="/amenities" element={<Amenities/>} />
             <Route path="/faq" element={<Faq/>} />
@@ -39,6 +46,11 @@ function App() {
               <Route path="/auth" element={<SignIn/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="/adminDash" element={<AdminDash/>} />
+              <Route path="/adminHome" element={<AdminHome/>} />
+              <Route path="/adminAbout" element={<AdminAbout/>} />
+              <Route path="/adminWhyJewar" element={<AdminWhyJewar/>} />
+              <Route path="/adminFaq" element={<AdminFaq/>} />
+        <Route path="/adminMedia" element={<AdminMedia/>} />
        </Routes>
        
        <Footer />
