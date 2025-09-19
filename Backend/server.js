@@ -10,7 +10,14 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+// ✅ Secure CORS: only allow your React frontend
+app.use(cors({
+  origin: ["https://anugrahhomes.com", "https://www.anugrahhomes.com"], // frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Static folder for uploads
@@ -34,10 +41,6 @@ app.use("/api/about", require("./routes/aboutRoutes"));
 app.use("/api/articles", require("./routes/articleRoutes"));
 app.use("/api/faqs", faqRoutes);
 app.use("/api/logs", require("./routes/logRoutes"));
-
-
-
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
