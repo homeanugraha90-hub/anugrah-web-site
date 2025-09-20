@@ -13,7 +13,7 @@ const app = express();
 
 // ✅ Secure CORS: only allow your React frontend
 app.use(cors({
-  origin: "*", // frontend domain
+  origin: ["http://localhost:5173","http://localhost:5174","https://anugrah-dream-home.netlify.app",], // frontend domain
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
