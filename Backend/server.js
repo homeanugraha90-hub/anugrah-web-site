@@ -12,11 +12,11 @@ connectDB();
 const app = express();
 
 // ✅ Secure CORS: only allow your React frontend
-// app.use(cors({
-//   origin: ["https://anugrahhomes.com", "https://www.anugrahhomes.com", "http://localhost:5173",], // frontend domain
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: ["https://anugrahhomes.com", "https://www.anugrahhomes.com", "http://localhost:5173","https://anugrah-dream-home.netlify.app/"], // frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 app.use(express.json());
 
